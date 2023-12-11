@@ -218,7 +218,7 @@ cd autonity-go-client
 
 ## Download latest stable release version of the client
 ```
-wget https://github.com/autonity/autonity/releases/autonity-linux-amd64-0.12.2.tar.gz
+wget https://github.com/autonity/autonity/releases/download/v0.12.2/autonity-linux-amd64-0.12.2.tar.gz
 ```
 
 ## Extract the file after download is completed.
