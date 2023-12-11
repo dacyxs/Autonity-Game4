@@ -228,20 +228,15 @@ tar -xzvf autonity-linux-amd64-0.12.2.tar.gz
 
 ## (Optional) Copy the binary to /usr/local/bin so it can be accessed by all users, or other location in your PATH :
 ```
-cd build/bin
-```
-```
 sudo cp -r autonity /usr/local/bin/autonity
-```
-```
-cd
 ```
 
 ## Verify the installation
 
 ```
-$ ./autonity version
+./autonity version
 ```
+# You should have the following output
 ```
 Autonity
 Version: 0.12.2
