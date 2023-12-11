@@ -249,3 +249,148 @@ Operating System: linux
 GOPATH=
 GOROOT=
 ```
+
+## Install Autonity Oracle Server in your environment
+
+```
+cd
+mkdir autonity-oracle && cd autonity-oracle
+docker pull ghcr.io/autonity/autonity-oracle-piccadilly:latest
+touch plugins-conf.yml
+```
+
+##Create oracle server account keys:
+
+```
+docker run \
+     -t -i \
+     --volume $<ORACLE_KEYFILE>:/autoracle/oracle.key \
+     --volume $<PATH_TO_PLUGINS_FILE>:/autoracle/plugins-conf.yml \
+     --name <ORACLE_CONTAINER_NAME> \
+     --rm \
+     <DOCKER_IMAGE>:latest \
+     -key.file="/autoracle/oracle.key" \
+     -key.password="<PWD>" \
+     -ws="<WS_ADDRESS>" \
+     -plugin.dir="/usr/local/bin/plugins/" \
+     -plugin.conf="/autoracle/plugins-conf.yml"
+```
+
+
+##where:
+
+<ORACLE_KEYFILE> specifies the path to your oracle server key file. E.g. ../aut/keystore/oracle.key
+<PLUGINS_CONF_FILE> is the path to the oracle server configuration file plugins-conf.yml. E.g. ./plugins-conf.yml.
+<ORACLE_CONTAINER_NAME> is the name you are specifying for the container, i.e. oracle-server-bakerloo or oracle-server-piccadilly
+<DOCKER_IMAGE> is the Docker image name, i.e. ghcr.io/autonity/autonity-oracle-bakerloo or ghcr.io/autonity/autonity-oracle-piccadilly
+<PWD> is the password to your oracle server key file
+<WS_ADDRESS> is the WebSocket IP Address of your connected Autonity Go Client node (e.g. “ws://172.17.0.2:8546”, see install Autonity, networks ).
+See the Autonity Oracle Server command-line reference for the full set of available flags.
+
+## Run Autonity (binary or source code install)
+
+```
+mkdir autonity-chaindata
+```
+
+## First create a new screen
+```
+apt install screen
+```
+```
+screen -S node
+```
+
+```
+docker run \
+    -t -i \
+    --volume $(pwd)/autonity-chaindata:/autonity-chaindata \
+    --publish 8545:8545 \
+    --publish 8546:8546 \
+    --publish 30303:30303 \
+    --publish 30303:30303/udp \
+    --publish 6060:6060 \
+    --name autonity \
+    --rm \
+    ghcr.io/autonity/autonity:latest \
+        --datadir ./autonity-chaindata  \
+        --piccadilly \
+        --http  \
+        --http.addr 0.0.0.0 \
+        --http.api aut,eth,net,txpool,web3,admin  \
+        --http.vhosts \* \
+        --ws  \
+        --ws.addr 0.0.0.0 \
+        --ws.api aut,eth,net,txpool,web3,admin  \
+        --nat extip:<IP_ADDRESS>
+```
+
+## Where: <IP_ADDRESS> is the node’s host IP Address, which can be determined with curl ifconfig.me.
+--piccadilly specifies that the node will use the Piccadilly tesnet. For other tesnets, use the appropriate flag (for example, --bakerloo).
+
+exit with CTRL + A + D ( Dont use CTRL + C)
+
+## in order to get back to node logs, you should enter below code: 
+```
+screen -r node
+```
+
+## If you are able to write below code your setup is completed.
+```
+aut node info
+```
+ 
+## Get the block number:
+```
+aut block height
+```
+
+## Check the auton balance of an account:
+```
+aut account balance <_addr>
+```
+
+## Check the newton balance of an account: 
+```
+aut account balance --ntn <_addr>
+```
+
+## Create account using aut. This will create key file and give you your address. 
+```
+aut account new
+```
+
+##Then we have to sign-message in the form with below code in order to get private key. Change the filename with your specific file name.
+```
+aut account sign-message "I have read and agree to comply with the Piccadilly Circus Games Competition Terms and Conditions published on IPFS with CID QmVghJVoWkFPtMBUcCiqs7Utydgkfe19wkLunhS5t57yEu" --keyfile /root/.autonity/keystore/filename
+```
+
+## Fund the account
+https://faucet.autonity.org/
+![image](https://user-images.githubusercontent.com/106930902/233856072-0cbeafb5-bd48-4b1a-b092-0a5d2c458346.png)
+
+## Register to game from the below link;
+https://game.autonity.org/getting-started/register.html
+
+
+## Continue to create Validator after you registered for the game;
+https://github.com/dacyxs/Autonity/blob/main/On_chain_tasks.md
+
+## Original document: 
+https://docs.autonity.org/
+https://game.autonity.org/
+
+## Official links of the project: 
+https://discord.gg/autonity
+https://twitter.com/autonity_
+https://autonity.org/
+
+## Block Explorer
+https://piccadilly.autonity.org/
+
+## Dashboard
+https://validators.game.autonity.org/dashboards/?query=
+
+## Follow me @
+https://twitter.com/Dacxys
+
