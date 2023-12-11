@@ -140,6 +140,46 @@ python3 -m pipx ensurepath
 python3 -m pip install --user --upgrade pipx
 ```
 ```
-apt install python3.8-venv
+cd
 ```
 
+## Once the installation is complete, start the Docker service and enable it to start at boot:
+```
+sudo systemctl start docker
+```
+```
+sudo systemctl enable docker
+```
+
+## Verify that Docker is installed correctly by running the hello-world container:
+```
+sudo docker run hello-world
+```
+
+## To limit the size of the log files, add the following to the file /etc/docker/daemon.json
+
+```
+nano /etc/docker/daemon.json
+```
+```
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "500m",
+    "max-file": "20"
+  }
+}
+```
+Press CTRL + X Then Y to save and quit.
+
+## Restart the Docker service to ensure the change is reflected:
+
+```
+sudo systemctl restart docker
+```
+
+## We have to reboot in order to run pipx command. 
+
+```
+sudo reboot
+```
