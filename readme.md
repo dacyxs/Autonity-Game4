@@ -142,6 +142,12 @@ python3 -m pip install --user --upgrade pipx
 ```
 cd
 ```
+```
+apt install python3.8-venv
+```
+```
+cd
+```
 
 ## Once the installation is complete, start the Docker service and enable it to start at boot:
 ```
@@ -182,4 +188,69 @@ sudo systemctl restart docker
 
 ```
 sudo reboot
+```
+
+## Ensure your aut tool is installed and up to date (0.3.0.dev3):
+
+```
+pipx install --force https://github.com/autonity/aut/releases/download/v0.3.0.dev3/aut-0.3.0.dev3-py3-none-any.whl
+```
+
+## Edit file .autrc with below command. Change keystorenameofyours with your info;
+
+```
+nano /root/.autrc
+```
+
+```
+[aut]
+rpc_endpoint = https://rpc1.piccadilly.autonity.org/
+nodekey=autonity-chaindata/autonity/nodekey
+keyfile=.autonity/keystore/keystorenameofyours
+```
+
+## Create a working directory for installing Autonity.
+
+```
+mkdir autonity-go-client
+cd autonity-go-client
+```
+
+## Download latest stable release version of the client
+```
+wget https://github.com/autonity/autonity/releases/autonity-linux-amd64-0.12.2.tar.gz
+```
+
+## Extract the file after download is completed.
+```
+tar -xzvf autonity-linux-amd64-0.12.2.tar.gz
+```
+
+## (Optional) Copy the binary to /usr/local/bin so it can be accessed by all users, or other location in your PATH :
+```
+cd build/bin
+```
+```
+sudo cp -r autonity /usr/local/bin/autonity
+```
+```
+cd
+```
+
+## Verify the installation
+
+```
+$ ./autonity version
+```
+```
+Autonity
+Version: 0.12.2
+Git Commit: 2495b37ae4aacc6505f6287cafe19cfbb0b7f17b
+Git Commit Date: 20231128
+Architecture: amd64
+Protocol Versions: [66]
+Go Version: go1.20.4
+Operating System: linux
+GOPATH=
+GOROOT=
 ```
