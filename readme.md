@@ -1,4 +1,4 @@
-<h1 align="center"> Autonity - Piccadilly Games R2 Guide </h1>
+<h1 align="center"> Autonity - Piccadilly Games R4 Guide </h1>
 
 ![image](https://user-images.githubusercontent.com/106930902/233866088-85068fd1-a996-499e-9737-51cab182046b.png)
 
@@ -55,3 +55,91 @@ sudo ufw allow 6060/tcp
 sudo ufw allow 22/tcp
 sudo ufw reload
 ```
+
+## Update the Server
+```
+sudo apt-get update && sudo apt-get upgrade
+```
+
+## Install the necessary packages to allow apt to use a repository over HTTPS:
+```
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+```
+
+## install git 
+```
+sudo apt-get install git
+```
+
+## install golang
+```
+wget https://golang.org/dl/go1.17.4.linux-amd64.tar.gz
+```
+```
+sudo tar -C /usr/local -xzf go1.17.4.linux-amd64.tar.gz
+```
+```
+export PATH=$PATH:/usr/local/go/bin
+```
+```
+source ~/.profile
+```
+```
+go version
+```
+
+## install c compiler
+```
+sudo apt-get install build-essential
+```
+```
+gcc --version
+```
+
+
+## Installing the Docker image
+```
+sudo apt install docker.io -y
+```
+```
+sudo systemctl enable --now docker
+```
+```
+systemctl restart docker.service
+```
+
+## Setup Python and Pip
+```
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
+```
+```
+wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
+```
+```
+tar -xf Python-3.9.6.tgz
+```
+```
+cd Python-3.9.6/
+```
+```
+./configure --enable-optimizations
+```
+```
+apt install python3-pip
+```
+```
+pip install pipx
+```
+```
+python3 -m pip install --user pipx
+```
+```
+python3 -m pipx ensurepath
+```
+```
+python3 -m pip install --user --upgrade pipx
+```
+```
+apt install python3.8-venv
+```
+
