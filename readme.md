@@ -209,6 +209,23 @@ nodekey=autonity-chaindata/autonity/nodekey
 keyfile=.autonity/keystore/keystorenameofyours
 ```
 
+## Create keystore file and create account(Change keystorenameofyours with your info). You will have your autonity address when you have created the account.
+<br> if you have already created your key in previous games. Change the key file in folder. 
+
+```
+cd
+mkdir keystore
+aut account new --keyfile ./keystore/keystorenameofyours.key
+```
+
+##Then we have to sign-message in the form with below code in order to get private key. Change the keystorenameofyours with your specific file name. When you signed you will have signature hash.
+
+```
+aut account sign-message "I have read and agree to comply with the Piccadilly Circus Games Competition Terms and Conditions published on IPFS with CID QmVghJVoWkFPtMBUcCiqs7Utydgkfe19wkLunhS5t57yEu" --keyfile /root/.autonity/keystore/keystorenameofyours
+```
+
+##Register to the game with the following link by using your autonity key address and signature hash.
+
 ## Create a working directory for installing Autonity.
 
 ```
