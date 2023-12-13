@@ -333,18 +333,33 @@ nano plugins-conf.yml
 <br> After nano *.yml paste all from the above link. 
 <br> Uncomment name: forex_currencyfreaks and 2 of the below lines. 
 <br> change key by getting API key from currencyfreaks.com
+<br> Press CTRL + X then Y to save your changes.
+
+##Run Oracle Server
+<br>Write docker ps to find container ID
+<br>Then write docker inspect that includes your container ID to find WS address.
 
 ```
+docker ps
+```
+
+```
+docker inspect -f '{{.NetworkSettings.IPAddress}}' [Container_ID]
+```
+
+<br> change dacxysoracle with your oracle key.
+<br> 
+```
 docker run \
-     -t -i \
-     --volume $<ORACLE_KEYFILE>:/autoracle/oracle.key \
-     --volume $<PATH_TO_PLUGINS_FILE>:/autoracle/plugins-conf.yml \
-     --name <ORACLE_CONTAINER_NAME> \
+     -t -i -d \
+     --volume $(pwd)/keystore/dacxysoracle.key:/autoracle/oracle.key \
+     --volume $(pwd)/autonity-oracle/plugins-conf.yml:/autoracle/plugins-conf.yml \
+     --name oracle-server-piccadilly \
      --rm \
-     <DOCKER_IMAGE>:latest \
+     ghcr.io/autonity/autonity-oracle-piccadilly:latest \
      -key.file="/autoracle/oracle.key" \
-     -key.password="<PWD>" \
-     -ws="<WS_ADDRESS>" \
+     -key.password="yourpassword" \
+     -ws="inspectedaddress:8546" \
      -plugin.dir="/usr/local/bin/plugins/" \
      -plugin.conf="/autoracle/plugins-conf.yml"
 ```
