@@ -360,7 +360,7 @@ docker inspect -f '{{.NetworkSettings.IPAddress}}' [Container_ID]
 ```
 docker run \
      -t -i -d \
-     --volume $(pwd)/keystore/dacxysoracle.key:/autoracle/oracle.key \
+     --volume $(pwd)/.autonity/keystore/dacxysoracle.key:/autoracle/oracle.key \
      --volume $(pwd)/autonity-oracle/plugins-conf.yml:/autoracle/plugins-conf.yml \
      --name oracle-server-piccadilly \
      --rm \
