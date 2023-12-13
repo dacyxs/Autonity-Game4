@@ -214,8 +214,8 @@ keyfile=.autonity/keystore/keystorenameofyours.key
 
 ```
 cd
-mkdir keystore
-aut account new --keyfile ./keystore/keystorenameofyours.key
+mkdir .autonity/keystore
+aut account new --keyfile .autonity/keystore/keystorenameofyours.key
 ```
 
 ##Then we have to sign-message in the form with below code in order to get private key. Change the keystorenameofyours with your specific file name. When you signed you will have signature hash.
@@ -228,6 +228,83 @@ aut account sign-message "I have read and agree to comply with the Piccadilly Ci
 
 ```
 https://game.autonity.org/getting-started/register.html
+```
+
+##After registration you should have atn and ntn balance in your account. Check with below commands.
+
+```
+aut account balance
+```
+
+```
+aut account balance -ntn
+```
+
+## pull latest docker
+
+```
+docker pull ghcr.io/autonity/autonity:latest
+```
+
+## Run Autonity (binary or source code install)
+
+```
+mkdir autonity-client
+cd autonity-client
+mkdir autonity-chaindata
+```
+
+## Find your IP Address
+
+```
+curl ifconfig.me
+```
+
+## First create a new screen
+```
+apt install screen
+```
+```
+screen -S node
+```
+
+```
+docker run \
+    -t -i -d\
+    --volume $(pwd)/autonity-chaindata:/autonity-chaindata \
+    --publish 8545:8545 \
+    --publish 8546:8546 \
+    --publish 30303:30303 \
+    --publish 30303:30303/udp \
+    --publish 6060:6060 \
+    --name autonity \
+    --rm \
+    ghcr.io/autonity/autonity:latest \
+        --datadir ./autonity-chaindata  \
+        --piccadilly \
+        --http  \
+        --http.addr 0.0.0.0 \
+        --http.api aut,eth,net,txpool,web3,admin  \
+        --http.vhosts \* \
+        --ws  \
+        --ws.addr 0.0.0.0 \
+        --ws.api aut,eth,net,txpool,web3,admin  \
+        --nat extip: 95.217.16.240/<IP_ADDRESS>
+```
+
+## Where: <IP_ADDRESS> is the node’s host IP Address, which can be determined with curl ifconfig.me.
+--piccadilly specifies that the node will use the Piccadilly tesnet. For other tesnets, use the appropriate flag (for example, --bakerloo).
+
+exit with CTRL + A + D ( Dont use CTRL + C)
+
+## in order to get back to node logs, you should enter below code: 
+```
+screen -r node
+```
+
+## If you are able to write below code your setup is completed.
+```
+aut node info
 ```
 
 ## Create a working directory for installing Autonity.
@@ -308,58 +385,7 @@ docker run \
 <WS_ADDRESS> is the WebSocket IP Address of your connected Autonity Go Client node (e.g. “ws://172.17.0.2:8546”, see install Autonity, networks ).
 See the Autonity Oracle Server command-line reference for the full set of available flags.
 
-## Run Autonity (binary or source code install)
 
-```
-mkdir autonity-chaindata
-```
-
-## First create a new screen
-```
-apt install screen
-```
-```
-screen -S node
-```
-
-```
-docker run \
-    -t -i \
-    --volume $(pwd)/autonity-chaindata:/autonity-chaindata \
-    --publish 8545:8545 \
-    --publish 8546:8546 \
-    --publish 30303:30303 \
-    --publish 30303:30303/udp \
-    --publish 6060:6060 \
-    --name autonity \
-    --rm \
-    ghcr.io/autonity/autonity:latest \
-        --datadir ./autonity-chaindata  \
-        --piccadilly \
-        --http  \
-        --http.addr 0.0.0.0 \
-        --http.api aut,eth,net,txpool,web3,admin  \
-        --http.vhosts \* \
-        --ws  \
-        --ws.addr 0.0.0.0 \
-        --ws.api aut,eth,net,txpool,web3,admin  \
-        --nat extip:<IP_ADDRESS>
-```
-
-## Where: <IP_ADDRESS> is the node’s host IP Address, which can be determined with curl ifconfig.me.
---piccadilly specifies that the node will use the Piccadilly tesnet. For other tesnets, use the appropriate flag (for example, --bakerloo).
-
-exit with CTRL + A + D ( Dont use CTRL + C)
-
-## in order to get back to node logs, you should enter below code: 
-```
-screen -r node
-```
-
-## If you are able to write below code your setup is completed.
-```
-aut node info
-```
  
 ## Get the block number:
 ```
