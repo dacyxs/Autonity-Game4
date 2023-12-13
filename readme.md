@@ -206,7 +206,7 @@ nano /root/.autrc
 [aut]
 rpc_endpoint = https://rpc1.piccadilly.autonity.org/
 nodekey=autonity-chaindata/autonity/nodekey
-keyfile=.autonity/keystore/keystorenameofyours
+keyfile=.autonity/keystore/keystorenameofyours.key
 ```
 
 ## Create keystore file and create account(Change keystorenameofyours with your info). You will have your autonity address when you have created the account.
@@ -225,6 +225,10 @@ aut account sign-message "I have read and agree to comply with the Piccadilly Ci
 ```
 
 ##Register to the game with the following link by using your autonity key address and signature hash.
+
+```
+https://game.autonity.org/getting-started/register.html
+```
 
 ## Create a working directory for installing Autonity.
 
