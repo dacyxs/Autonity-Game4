@@ -218,6 +218,14 @@ mkdir .autonity/keystore
 aut account new --keyfile .autonity/keystore/keystorenameofyours.key
 ```
 
+OR import
+
+```
+cd
+mkdir .autonity/keystore
+aut account import-private-key ./alice.priv
+```
+
 ##Then we have to sign-message in the form with below code in order to get private key. Change the keystorenameofyours with your specific file name. When you signed you will have signature hash.
 
 ```
