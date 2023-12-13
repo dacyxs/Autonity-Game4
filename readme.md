@@ -311,10 +311,28 @@ aut node info
 cd
 mkdir autonity-oracle && cd autonity-oracle
 docker pull ghcr.io/autonity/autonity-oracle-piccadilly:latest
-touch plugins-conf.yml
+```
+
+## Create account for your oracle server.
+
+```
+aut account new -k .autonity/keystore/dacxysoracle.key
+```
+```
+cd autonity-oracle
 ```
 
 ##Create oracle server account keys:
+
+## Open https://github.com/autonity/autonity-oracle/blob/master/config/plugins-conf.yml and copy them into plugins-conf.yml file. 
+
+```
+nano plugins-conf.yml
+```
+
+<br> After nano *.yml paste all from the above link. 
+<br> Uncomment name: forex_currencyfreaks and 2 of the below lines. 
+<br> change key by getting API key from currencyfreaks.com
 
 ```
 docker run \
