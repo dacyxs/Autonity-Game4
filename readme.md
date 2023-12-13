@@ -289,8 +289,9 @@ docker run \
         --ws  \
         --ws.addr 0.0.0.0 \
         --ws.api aut,eth,net,txpool,web3,admin  \
-        --nat extip: 95.217.16.240/<IP_ADDRESS>
+        --nat extip:<IP_ADDRESS>
 ```
+<br> docker ps to check whether your docker running and docket logs [Container ID] to check logs.<br>
 
 ## Where: <IP_ADDRESS> is the node’s host IP Address, which can be determined with curl ifconfig.me.
 --piccadilly specifies that the node will use the Piccadilly tesnet. For other tesnets, use the appropriate flag (for example, --bakerloo).
