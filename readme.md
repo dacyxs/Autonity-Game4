@@ -367,16 +367,35 @@ docker run \
 
 ##where:
 
-<ORACLE_KEYFILE> specifies the path to your oracle server key file. E.g. ../aut/keystore/oracle.key
-<PLUGINS_CONF_FILE> is the path to the oracle server configuration file plugins-conf.yml. E.g. ./plugins-conf.yml.
-<ORACLE_CONTAINER_NAME> is the name you are specifying for the container, i.e. oracle-server-bakerloo or oracle-server-piccadilly
-<DOCKER_IMAGE> is the Docker image name, i.e. ghcr.io/autonity/autonity-oracle-bakerloo or ghcr.io/autonity/autonity-oracle-piccadilly
-<PWD> is the password to your oracle server key file
-<WS_ADDRESS> is the WebSocket IP Address of your connected Autonity Go Client node (e.g. “ws://172.17.0.2:8546”, see install Autonity, networks ).
-See the Autonity Oracle Server command-line reference for the full set of available flags.
+<br><ORACLE_KEYFILE> specifies the path to your oracle server key file. E.g. ../aut/keystore/oracle.key
+<br><PLUGINS_CONF_FILE> is the path to the oracle server configuration file plugins-conf.yml. E.g. ./plugins-conf.yml.
+<br><ORACLE_CONTAINER_NAME> is the name you are specifying for the container, i.e. oracle-server-bakerloo or oracle-server-piccadilly
+<br><DOCKER_IMAGE> is the Docker image name, i.e. ghcr.io/autonity/autonity-oracle-bakerloo or ghcr.io/autonity/autonity-oracle-piccadilly
+<br><PWD> is the password to your oracle server key file
+<br><WS_ADDRESS> is the WebSocket IP Address of your connected Autonity Go Client node (e.g. “ws://172.17.0.2:8546”, see install Autonity, networks ).
+<br>See the Autonity Oracle Server command-line reference for the full set of available flags.
+
+## Add autonity to metamask to send atn to oracle account. Send 0.01 ATN. Then reveal private key of your oracle account.
+<br>Network Name: Autonity Piccadilly (Barada) Testnet
+<br>New RPC URL: https://rpc1.piccadilly.autonity.org/
+<br>Chain ID: 65100001
+<br>Currency symbol: ATN
+<br>Block explorer URL: https://piccadilly.autonity.org/
+
+
+```
+cd .autonity/keystore
+nano oracle.key
+```
 
 # Onboard validator<br>
 # Register as a Validator<br>
+
+```
+cd
+
+docker run -t -i --volume $(pwd)/autonity-chaindata:/autonity-chaindata --volume .autonity/keystore/oracle.key --name autonity-proof --rm ghcr.io/autonity/autonity:latest genOwnershipProof --nodekey ./autonity-chaindata/autonity/nodekey --oraclekey oracle.key <TREASURY_ACCOUNT_ADDRESS>
+```
 
 ## Step 1. Generate a cryptographic proof of node ownership 
 This must be performed on the host machine running the Autonity Go Client, using the autonity genEnodeProof command:<br>
