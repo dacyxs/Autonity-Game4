@@ -291,10 +291,7 @@ docker run \
         --ws.api aut,eth,net,txpool,web3,admin  \
         --nat extip:<IP_ADDRESS>
 ```
-<br> docker ps to check whether your docker running and docket logs [Container ID] to check logs.<br>
-
-## Where: <IP_ADDRESS> is the node’s host IP Address, which can be determined with curl ifconfig.me.
---piccadilly specifies that the node will use the Piccadilly tesnet. For other tesnets, use the appropriate flag (for example, --bakerloo).
+<br> docker ps to check whether your docker running and docker logs [Container ID] to check logs.<br>
 
 exit with CTRL + A + D ( Dont use CTRL + C)
 
@@ -307,6 +304,44 @@ screen -r node
 ```
 aut node info
 ```
+
+## Install Autonity Oracle Server in your environment
+
+```
+cd
+mkdir autonity-oracle && cd autonity-oracle
+docker pull ghcr.io/autonity/autonity-oracle-piccadilly:latest
+touch plugins-conf.yml
+```
+
+##Create oracle server account keys:
+
+```
+docker run \
+     -t -i \
+     --volume $<ORACLE_KEYFILE>:/autoracle/oracle.key \
+     --volume $<PATH_TO_PLUGINS_FILE>:/autoracle/plugins-conf.yml \
+     --name <ORACLE_CONTAINER_NAME> \
+     --rm \
+     <DOCKER_IMAGE>:latest \
+     -key.file="/autoracle/oracle.key" \
+     -key.password="<PWD>" \
+     -ws="<WS_ADDRESS>" \
+     -plugin.dir="/usr/local/bin/plugins/" \
+     -plugin.conf="/autoracle/plugins-conf.yml"
+```
+
+
+##where:
+
+<ORACLE_KEYFILE> specifies the path to your oracle server key file. E.g. ../aut/keystore/oracle.key
+<PLUGINS_CONF_FILE> is the path to the oracle server configuration file plugins-conf.yml. E.g. ./plugins-conf.yml.
+<ORACLE_CONTAINER_NAME> is the name you are specifying for the container, i.e. oracle-server-bakerloo or oracle-server-piccadilly
+<DOCKER_IMAGE> is the Docker image name, i.e. ghcr.io/autonity/autonity-oracle-bakerloo or ghcr.io/autonity/autonity-oracle-piccadilly
+<PWD> is the password to your oracle server key file
+<WS_ADDRESS> is the WebSocket IP Address of your connected Autonity Go Client node (e.g. “ws://172.17.0.2:8546”, see install Autonity, networks ).
+See the Autonity Oracle Server command-line reference for the full set of available flags.
+
 
 ## Create a working directory for installing Autonity.
 
@@ -348,43 +383,6 @@ Operating System: linux
 GOPATH=
 GOROOT=
 ```
-
-## Install Autonity Oracle Server in your environment
-
-```
-cd
-mkdir autonity-oracle && cd autonity-oracle
-docker pull ghcr.io/autonity/autonity-oracle-piccadilly:latest
-touch plugins-conf.yml
-```
-
-##Create oracle server account keys:
-
-```
-docker run \
-     -t -i \
-     --volume $<ORACLE_KEYFILE>:/autoracle/oracle.key \
-     --volume $<PATH_TO_PLUGINS_FILE>:/autoracle/plugins-conf.yml \
-     --name <ORACLE_CONTAINER_NAME> \
-     --rm \
-     <DOCKER_IMAGE>:latest \
-     -key.file="/autoracle/oracle.key" \
-     -key.password="<PWD>" \
-     -ws="<WS_ADDRESS>" \
-     -plugin.dir="/usr/local/bin/plugins/" \
-     -plugin.conf="/autoracle/plugins-conf.yml"
-```
-
-
-##where:
-
-<ORACLE_KEYFILE> specifies the path to your oracle server key file. E.g. ../aut/keystore/oracle.key
-<PLUGINS_CONF_FILE> is the path to the oracle server configuration file plugins-conf.yml. E.g. ./plugins-conf.yml.
-<ORACLE_CONTAINER_NAME> is the name you are specifying for the container, i.e. oracle-server-bakerloo or oracle-server-piccadilly
-<DOCKER_IMAGE> is the Docker image name, i.e. ghcr.io/autonity/autonity-oracle-bakerloo or ghcr.io/autonity/autonity-oracle-piccadilly
-<PWD> is the password to your oracle server key file
-<WS_ADDRESS> is the WebSocket IP Address of your connected Autonity Go Client node (e.g. “ws://172.17.0.2:8546”, see install Autonity, networks ).
-See the Autonity Oracle Server command-line reference for the full set of available flags.
 
 
  
