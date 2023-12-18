@@ -194,6 +194,13 @@ sudo reboot
 
 ```
 pipx install --force https://github.com/autonity/aut/releases/download/v0.3.0.dev3/aut-0.3.0.dev3-py3-none-any.whl
+pipx ensurepath
+```
+
+## We have to reboot in order to run aut command. 
+
+```
+sudo reboot
 ```
 
 ## Edit file .autrc with below command. Change keystorenameofyours with your info;
@@ -214,6 +221,7 @@ keyfile=.autonity/keystore/keystorenameofyours.key
 
 ```
 cd
+mkdir .autonity
 mkdir .autonity/keystore
 aut account new --keyfile .autonity/keystore/keystorenameofyours.key
 ```
@@ -222,6 +230,7 @@ OR import
 
 ```
 cd
+mkdir .autonity
 mkdir .autonity/keystore
 aut account import-private-key ./alice.priv
 ```
