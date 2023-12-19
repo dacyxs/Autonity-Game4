@@ -212,7 +212,6 @@ nano /root/.autrc
 ```
 [aut]
 rpc_endpoint = https://rpc1.piccadilly.autonity.org/
-nodekey=autonity-chaindata/autonity/nodekey
 keyfile=.autonity/keystore/keystorenameofyours.key
 ```
 
@@ -406,6 +405,14 @@ nano oracle.key
 ```
 Write you private key in file. 
 
+#Change your autrc as below.
+
+```
+[aut]
+rpc_endpoint = http://0.0.0.0:8545/
+keyfile=.autonity/keystore/keystorenameofyours.key
+```
+
 # Onboard validator<br>
 # Register as a Validator<br>
 
@@ -487,9 +494,8 @@ https://faucet.autonity.org/
 ## Register to game from the below link;
 https://game.autonity.org/getting-started/register.html
 
-
-## Continue to create Validator after you registered for the game;
-https://github.com/dacyxs/Autonity/blob/main/On_chain_tasks.md
+## Onboard Validaotr from the below link;
+https://game.autonity.org/awards/register-validator.html
 
 ## Original document: 
 https://docs.autonity.org/
