@@ -517,6 +517,9 @@ https://piccadilly.autonity.org/
 ## Dashboard
 https://validators.game.autonity.org/dashboards/?query=
 
+## Youtube video 
+https://www.youtube.com/watch?v=cJJS0KDwyBo
+
 ## Follow me @
 https://twitter.com/Dacxys
 
