@@ -487,6 +487,11 @@ aut account new
 aut account sign-message "I have read and agree to comply with the Piccadilly Circus Games Competition Terms and Conditions published on IPFS with CID QmVghJVoWkFPtMBUcCiqs7Utydgkfe19wkLunhS5t57yEu" --keyfile /root/.autonity/keystore/filename
 ```
 
+##Bond your ntn 
+
+aut validator bond --validator <VALIDATOR_IDENTIFIER_ADDRESS> <AMOUNT> | aut tx sign - | aut tx send -
+
+
 ## Fund the account
 https://faucet.autonity.org/
 ![image](https://user-images.githubusercontent.com/106930902/233856072-0cbeafb5-bd48-4b1a-b092-0a5d2c458346.png)
