@@ -495,6 +495,18 @@ VALIDATOR=$(aut validator compute-address $ENODEURL)
 aut validator bond --validator $VALIDATOR <AMOUNT> | aut tx sign - | aut tx send -
 ```
 
+## If your point is not increasing. Check your status. Your status should be 0. If not your jail release block should be passed. 
+```
+aut validator info --validator $VALIDATOR
+```
+
+Write below command in order to avtivate your validator.
+```
+aut validator activate --validator <VALIDATOR_IDENTIFIER_ADDRESS> | aut tx sign - | aut tx send -
+```
+
+
+
 ## Fund the account
 https://faucet.autonity.org/
 ![image](https://user-images.githubusercontent.com/106930902/233856072-0cbeafb5-bd48-4b1a-b092-0a5d2c458346.png)
