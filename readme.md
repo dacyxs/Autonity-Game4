@@ -487,10 +487,13 @@ aut account new
 aut account sign-message "I have read and agree to comply with the Piccadilly Circus Games Competition Terms and Conditions published on IPFS with CID QmVghJVoWkFPtMBUcCiqs7Utydgkfe19wkLunhS5t57yEu" --keyfile /root/.autonity/keystore/filename
 ```
 
-##Bond your ntn 
+##Bond your ntn(change <amount> with the desired amount to bond.
 
-aut validator bond --validator <VALIDATOR_IDENTIFIER_ADDRESS> <AMOUNT> | aut tx sign - | aut tx send -
-
+```
+ENODEURL=$(aut node info -r http://127.0.0.1:8545 | grep enode | awk '{print $2}' | tr -d ,'"')
+VALIDATOR=$(aut validator compute-address $ENODEURL)
+aut validator bond --validator $VALIDATOR <AMOUNT> | aut tx sign - | aut tx send -
+```
 
 ## Fund the account
 https://faucet.autonity.org/
