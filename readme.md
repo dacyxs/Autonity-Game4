@@ -193,7 +193,7 @@ sudo reboot
 ## Ensure your aut tool is installed and up to date (0.3.0.dev3):
 
 ```
-pipx install --force https://github.com/autonity/aut/releases/download/v0.3.0.dev3/aut-0.3.0.dev3-py3-none-any.whl
+pipx install --force git+https://github.com/autonity/aut
 pipx ensurepath
 ```
 
